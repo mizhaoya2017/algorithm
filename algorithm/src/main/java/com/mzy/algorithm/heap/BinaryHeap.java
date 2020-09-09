@@ -15,7 +15,13 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> {
 
     }
     public BinaryHeap(AnyType[] items) {
-
+        currentSize = items.length;
+        array = (AnyType[])new Comparable[(currentSize+2)*11/10];
+        int i = 1;
+        for (AnyType item: items) {
+            array[i++] = item;
+        }
+        buildHeap();
     }
     public void insert(AnyType x) {
         if (currentSize == array.length -1) {
@@ -65,7 +71,9 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> {
         array[hole] = tmp;
     }
     private void buildHeap() {
-
+        for (int i = currentSize/2; i> 0; i --) {
+            percolateDown(i);
+        }
     }
     private void enlargeArray(int newSize) {
 
