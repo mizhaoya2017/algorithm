@@ -56,11 +56,20 @@ public class TestSort {
     public Integer getKMax3(int k, List<Integer> arr) {
         //1、堆排序
         for (int i = arr.size()/2; i > 0; i ++) {
-
+            percolateDown(i, arr);
         }
         //2、删除4个
+        for (int x = 0; x < 4; x ++) {
+            delete(arr);
+        }
         //3、获取顶部元素
-        return null;
+        return arr.get(1);
+    }
+
+    public void delete(List<Integer> arr) {
+        int currentSize = arr.size();
+        arr.set(1,arr.get(currentSize--));
+        percolateDown(1, arr);
     }
 
     public void percolateDown(int x, List<Integer> arr) {
@@ -77,5 +86,35 @@ public class TestSort {
                 break;
             }
         }
+    }
+
+    public Integer getKMax4(int k, List<Integer> arr) {
+        //1、构造前k个堆
+        List<Integer> arr1 = new ArrayList<>();
+        for (int i = 1; i <= k; i ++) {
+            arr1.set(i, arr.get(i));
+        }
+        for (int i = arr1.size()/2; i > 0; i ++) {
+            percolateDown(i, arr1);
+        }
+        //2、如果比k大插入剩余
+        Integer tmp = arr1.get(arr1.size());
+        for (int i = k+1; i < arr.size(); i ++) {
+            if (tmp < arr.get(i)) {
+                arr1.remove(k);
+                insert(arr1, arr.get(i));
+            }
+        }
+        //4、获取第k个
+        return arr1.get(k);
+    }
+
+    public void insert(List<Integer> arr, int x) {
+        int currentSize = arr.size();
+        int i = ++currentSize;
+        for (; arr.get(i) > arr.get(i/2); i =i/2) {
+            arr.set(i, arr.get(i/2));
+        }
+        arr.set(i, x);
     }
 }
