@@ -11,37 +11,20 @@ import java.util.Map;
 public class Solution_20201022 {
 
     public static int maxArea(int[] height) {
-        Map<Integer, Integer> map = new HashMap<>();
         int x = 0;
         for (int i = 0; i < height.length; i ++) {
-            if (isMax(height[i], i, map, x)) {
-                x = getMax(height[i], i, map, x) 
+            for (int j = i; j < height.length; j ++) {
+                int min = Math.min(height[i], height[j]);
+                int every = min * (j - i);
+                if (x < every) {
+                    x = every;
+                }
             }
         }
-        return 1;
-    }
-
-    public static boolean isMax(int c, int i, Map<Integer, Integer> map, int x) {
-        for (Integer key: map.keySet()) {
-            Integer value = map.get(key);
-            if (Math.max(c, key) * (value - i) > x) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static int getMax(int c, int i, Map<Integer, Integer> map, int x) {
-        for (Integer key: map.keySet()) {
-            Integer value = map.get(key);
-            if (Math.max(c, key) * (value - i) > x) {
-                return value;
-            }
-        }
-        return 0;
+        return x;
     }
 
     public static void main(String[] args) {
-
+        System.out.println(maxArea(new int[]{1,8,6,2,5,4,8,3,7}));
     }
 }
