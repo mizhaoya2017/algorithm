@@ -11,7 +11,8 @@ import java.util.Map;
 public class Solution_20201013 {
     public static int[] twoSum(int[] nums, int target) {
         int[] res = new int[2];
-        int len = nums.length;
+        int length = nums.length;
+        int len = length;
         for (int i = 0; i < len-1; i ++) {
             for (int j = i + 1; j < len; j ++) {
                 if (nums[i] + nums[j] == target) {
