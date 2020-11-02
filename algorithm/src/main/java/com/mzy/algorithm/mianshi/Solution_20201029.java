@@ -28,8 +28,16 @@ public class Solution_20201029 {
     }
 
     public static String intToRoman(int num) {
-        int[] x = new int[]{1000,900,500,400,100,}
-        return null;
+        int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] symbols = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+        StringBuffer res = new StringBuffer();
+        for (int i = 0;i < values.length && num > 0; i ++) {
+            while(num >= values[i]) {
+                res.append(symbols[i]);
+                num = num - values[i];
+            }
+        }
+        return res.toString();
     }
 
     public static void main(String[] args) {
