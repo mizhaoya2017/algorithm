@@ -41,8 +41,59 @@ public class Solution_20201127 {
 
     }
 
+    public static List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i ++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            for (int j = i + 1; j < nums.length; j ++) {
+                if (j > 0 && nums[j] == nums[j -1]) {
+                    continue;
+                }
+                int s = j + 1;
+                int e = nums.length - 1;
+                while(s < e) {
+                    if (nums[i] + nums[j] + nums[s] + nums[e] == target) {
+                        List<Integer> sum = new ArrayList<>();
+                        sum.add(nums[i]);
+                        sum.add(nums[j]);
+                        sum.add(nums[s]);
+                        sum.add(nums[e]);
+                        res.add(sum);
+                        s ++;
+                        e --;
+                        while (s > 0 && s < nums.length && nums[s] == nums[s - 1]) {
+                            s ++;
+                        }
+                        while (e >= 0 && e < nums.length - 1 && nums[e] == nums[e + 1]) {
+                            e --;
+                        }
+                    } else if (nums[i] + nums[j] + nums[s] + nums[e] < target) {
+                        s ++;
+                        while (s > 0 && s < nums.length && nums[s] == nums[s - 1]) {
+                            s ++;
+                        }
+                    } else {
+                        e --;
+                        while (e >= 0 && e < nums.length -1 && nums[e] == nums[e + 1]) {
+                            e --;
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
-        System.out.println(letterCombinations("23"));
-        System.out.println(letterCombinations(""));
+        System.out.println(fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0));
+        System.out.println(fourSum(new int[]{0,0,0,0}, 0));
+        System.out.println(fourSum(new int[]{-2,-1,-1,1,1,2,2}, 0));
+
+
+//        System.out.println(letterCombinations("23"));
+//        System.out.println(letterCombinations(""));
     }
 }
