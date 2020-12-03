@@ -1,5 +1,9 @@
 package com.mzy.algorithm.mianshi;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
 /**
  * @author ：mizhaoya
  * @date ：2020/12/3 11:02
@@ -30,16 +34,40 @@ public class Solution_20201203 {
     }
 
     public static boolean isValid(String s) {
-        return true;
+        Map map = new HashMap<Character, Character>();
+        map.put('(', ')');
+        map.put('{', '}');
+        map.put('[', ']');
+        Stack<Character> stack = new Stack<Character>();
+        for (int i = 0; i < s.length(); i ++) {
+            char c = s.charAt(i);
+            if (!stack.empty()) {
+                Character last = stack.lastElement();
+                if (map.get(last) != null && map.get(last).equals(c)) {
+                    stack.pop();
+                } else {
+                    stack.push(c);
+                }
+            } else {
+                stack.push(c);
+            }
+        }
+        return stack.empty();
     }
 
     public static void main(String[] args) {
-        ListNode x = new ListNode(1, new ListNode(2));
+//        ListNode x = new ListNode(1, new ListNode(2));
 //        ListNode x = null;
 //        ListNode x = new ListNode(1);
 //        ListNode x = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
-        ListNode listNode = removeNthFromEnd(x, 2);
-        System.out.println(listNode);
+//        ListNode listNode = removeNthFromEnd(x, 2);
+
+//        System.out.println(listNode);
+        System.out.println(isValid("()"));
+        System.out.println(isValid("()[]{}"));
+        System.out.println(isValid("(]"));
+        System.out.println(isValid("([)]"));
+        System.out.println(isValid("{[]}"));
     }
 
     private static int getLen(ListNode head) {
