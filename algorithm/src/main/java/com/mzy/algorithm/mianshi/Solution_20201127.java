@@ -49,7 +49,7 @@ public class Solution_20201127 {
                 continue;
             }
             for (int j = i + 1; j < nums.length; j ++) {
-                if (j > 0 && nums[j] == nums[j -1]) {
+                if (j > i + 1 && nums[j] == nums[j -1]) {
                     continue;
                 }
                 int s = j + 1;
@@ -88,9 +88,9 @@ public class Solution_20201127 {
     }
 
     public static void main(String[] args) {
-        System.out.println(fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0));
-        System.out.println(fourSum(new int[]{0,0,0,0}, 0));
-        System.out.println(fourSum(new int[]{-2,-1,-1,1,1,2,2}, 0));
+        System.out.println(fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0));//[[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]]
+        System.out.println(fourSum(new int[]{0,0,0,0}, 0));//[0,0,0,0]
+        System.out.println(fourSum(new int[]{-2,-1,-1,1,1,2,2}, 0));//[[-2, -1, 1, 2], [-1, -1, 1, 1]]
 
 
 //        System.out.println(letterCombinations("23"));
