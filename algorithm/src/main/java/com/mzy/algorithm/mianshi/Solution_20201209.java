@@ -43,7 +43,29 @@ public class Solution_20201209 {
         return add == 0;
     }
 
+
+    public static List<String> generateParenthesis2(int n) {
+        List<String> res = new ArrayList<>();
+        generateAll2(n, n, new StringBuffer(), n, res);
+        return res;
+    }
+
+    public static void generateAll2(int start, int end, StringBuffer cur, int n, List<String> res) {
+        if (cur.length() == n * 2) {
+            res.add(cur.toString());
+            return;
+        }
+        if (start > 0) {
+            generateAll2(start - 1, end, cur.append("("), n, res);
+            cur.deleteCharAt(cur.length() - 1);
+        }
+        if (start < end) {
+            generateAll2(start, end - 1, cur.append(")"), n, res);
+            cur.deleteCharAt(cur.length() - 1);
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println(generateParenthesis(1));
+        System.out.println(generateParenthesis2(4));
     }
 }
