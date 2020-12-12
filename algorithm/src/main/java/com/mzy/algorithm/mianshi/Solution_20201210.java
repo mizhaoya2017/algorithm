@@ -10,22 +10,32 @@ import java.util.List;
  */
 public class Solution_20201210 {
     public static ListNode3 swapPairs(ListNode3 head) {
-        int i = 0;
-        ListNode3 f = head;
-        while (f.next != null) {
-            if (i % 2 == 0) {
-                ListNode3 x = f.next;
-                f.next = f.next.next;
-                x.next = f;
-            }
-            f = f.next.next;
-            i ++;
+        ListNode3 pre = new ListNode3(0);
+        pre.next = head;
+        ListNode3 f = pre;
+        while (f.next != null && f.next.next != null) {
+            ListNode3 start = f.next;
+            ListNode3 end = f.next.next;
+            f.next = end;
+            start.next = end.next;
+            end.next = start;
+            f = start;
         }
-        return head;
+        return pre.next;
+    }
+
+    public static ListNode3 swapPairs2(ListNode3 head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode3 next = head.next;
+        head.next = swapPairs2(next.next);
+        next.next = head;
+        return next;
     }
 
     public static void main(String[] args) {
-        ListNode3 res = swapPairs(new ListNode3(1, new ListNode3(2, new ListNode3(3, new ListNode3(4)))));
+        ListNode3 res = swapPairs2(new ListNode3(1, new ListNode3(2, new ListNode3(3, new ListNode3(4)))));
     }
 }
 
