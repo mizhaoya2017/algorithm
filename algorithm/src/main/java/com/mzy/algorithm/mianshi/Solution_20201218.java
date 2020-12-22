@@ -8,29 +8,19 @@ package com.mzy.algorithm.mianshi;
 public class Solution_20201218 {
 
     public static int strStr(String haystack, String needle) {
-        int s = 0;
-        int k = 0;
-        int e = 0;
-        int f = 0;
-        while (k < needle.length() && s < haystack.length()) {
-            if (haystack.charAt(s) == needle.charAt(k)) {
-                if (f == 0) {
-                    e = s;
-                    f = 1;
+        for (int i = 0; i <= haystack.length() - needle.length(); i ++) {
+            int j;
+            for (j = 0; j < needle.length(); j ++) {
+                if (needle.charAt(j) != haystack.charAt(i + j)) {
+                    break;
                 }
-                k ++;
-                s ++;
-            } else {
-                s ++;
+
+            }
+            if (j == needle.length()) {
+                return i;
             }
         }
-        if(k == needle.length()) {
-            return e;
-        } else if (s == haystack.length()) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return -1;
     }
 
     public static void main(String[] args) {
@@ -38,5 +28,6 @@ public class Solution_20201218 {
         System.out.println(strStr("aaaaa", "bba"));
         System.out.println(strStr("aaa", "aaaa"));
         System.out.println(strStr("mississippi", "issip"));
+        System.out.println(strStr("", ""));
     }
 }
