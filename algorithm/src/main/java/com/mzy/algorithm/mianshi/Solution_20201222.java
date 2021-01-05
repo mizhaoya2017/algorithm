@@ -15,7 +15,7 @@ public class Solution_20201222 {
         int INT_MIN = 1 << 31;
         int _dividend = dividend < 0? dividend: -dividend;
         int _divisor = divisor < 0 ? divisor: -divisor;
-        int symbol = dividend ^ divisor >> 31;
+        int symbol = (dividend ^ divisor) >> 31;
         List<Integer> times = getTimes(_dividend, _divisor, new ArrayList<>());
         int output = 0;
         for (int t: times) {
