@@ -1,0 +1,44 @@
+package com.mzy.algorithm.mianshi;
+
+/**
+ * @author ：mizhaoya
+ * @date ：2021/1/15 14:26
+ * @description：
+ */
+public class Solution_20210115 {
+
+    public static int searchInsert(int[] nums, int target) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int[] numsCopy = new int[nums.length+2];
+        for (int i = 0; i < nums.length;i ++) {
+            numsCopy[i + 1] = nums[i];
+        }
+        int left = 0;
+        int right = nums.length + 1;
+        while (left < right) {
+            if (numsCopy[left + 1] < target) {
+                left++;
+            } else if (numsCopy[left + 1] == target) {
+                return left;
+            }
+            if (numsCopy[right - 1] > target) {
+                right --;
+            } else if (numsCopy[right - 1] == target) {
+                return right  - 2;
+            }
+            if (left == right - 1) {
+                return left;
+            }
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(searchInsert(new int[]{1,3,5,6}, 5));
+        System.out.println(searchInsert(new int[]{1,3,5,6}, 2));
+        System.out.println(searchInsert(new int[]{1,3,5,6}, 7));
+        System.out.println(searchInsert(new int[]{1,3,5,6}, 0));
+    }
+}
